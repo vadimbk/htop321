@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# add right htop to debian/ubuntu containers in Proxmox 8.x
+apt update
+apt install -y libncursesw5-dev autotools-dev autoconf automake build-essential wget
+
+wget https://github.com/htop-dev/htop/releases/download/3.2.1/htop-3.2.1.tar.xz
+
+rm -rf htop-3.2.1
+tar xf htop-3.2.1.tar.xz
+cd htop-3.2.1/
+
+./autogen.sh && ./configure && make
+
+cp htop /usr/bin/htp
+
+cd ..
+rm -rf htop-3.2.1 htop-3.2.1.tar.xz
+
+echo "htop 3.2.1 successfully installed. Type 'htp' to use it"
